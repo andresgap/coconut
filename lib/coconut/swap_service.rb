@@ -31,7 +31,11 @@ module Coconut
     end
 
     def server_file(file)
-      "#{CUSTOMERS_PATH}/#{file}.#{customer}"
+      "#{customers_path}/#{file}.#{customer}"
+    end
+
+    def customers_path
+      "#{Rails.root}/#{Coconut::CONFIG['local']['customer_path']}"
     end
 
     def config_file(file)

@@ -44,8 +44,9 @@ module Coconut
     end
 
     def customers_path
-      FileUtils.mkdir_p(CUSTOMERS_PATH) unless File.exist?(CUSTOMERS_PATH)
-      CUSTOMERS_PATH
+      path = "#{Rails.root}/#{Coconut::CONFIG['local']['customer_path']}"
+      FileUtils.mkdir_p(path) unless File.exist?(path)
+      path
     end
 
     def convert_file(file)

@@ -1,8 +1,7 @@
 require 'yaml'
 
 module Coconut
-  # CONFIG = YAML.load_file(File.join(GEM_ROOT, 'config/coconut.yml'))
-  # CUSTOMERS_PATH = File.join(GEM_ROOT, Coconut::CONFIG['local']['customer_path'])
+
 end
 
 require_relative "coconut/version"
