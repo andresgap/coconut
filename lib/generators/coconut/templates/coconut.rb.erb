@@ -2,7 +2,6 @@ module Coconut
   begin
     CONFIG = YAML.load_file(File::join(Rails.root, 'config/coconut.yml'))
     CUSTOMERS_PATH = "#{Rails.root}/#{Coconut::CONFIG['local']['customer_path']}"
-    CONFIG_PATH = "#{Rails.root}/config"
   rescue => ex
   end
 

@@ -35,7 +35,7 @@ module Coconut
     end
 
     def config_file(file)
-      "#{CONFIG_PATH}/#{file}"
+      "#{Rails.root}/config/#{file}"
     end
 
   end
