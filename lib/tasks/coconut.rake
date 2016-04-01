@@ -1,6 +1,6 @@
-require_relative '../coconut/coconut'
+require_relative '../coconut'
 
-namespace :coconut2 do
+namespace :coconut do
   desc 'Swap the current development environment'
   task :swap, [:customer] => [:environment] do |t, args|
     Coconut::SwapService.new(customer: args[:customer]).start
