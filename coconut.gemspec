@@ -6,11 +6,11 @@ require 'coconut/version'
 Gem::Specification.new do |spec|
   spec.name          = "coconut"
   spec.version       = Coconut::VERSION
-  spec.authors       = ["Roy Cruz"]
-  spec.email         = ["rcruz@growthaccelerationpartners.com"]
+  spec.authors       = ["Andres Hernandez", "Roy Cruz"]
+  spec.email         = ["ahernandez@growthaccelerationpartners.com", "rcruz@growthaccelerationpartners.com"]
 
-  spec.summary       = ''
-  spec.description   = ''
+  spec.summary       = 'Local customer configuration switcher'
+  spec.description   = 'Local customer configuration switcher'
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
