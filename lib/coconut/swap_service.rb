@@ -3,18 +3,20 @@ module Coconut
 
     def initialize(customer:)
       @customer = customer
+      @config = Configuration.new
       @command = CommandInterface.new
     end
 
     def start
       puts "Swapping the configuration for #{customer}"
-      config_files.each { |file, config| swap_file(file) }
+      config_files.each { |file, value| swap_file(file) }
       clear_caches
     end
 
     private
 
     attr_accessor :customer
+    attr_accessor :config
     attr_accessor :command
 
     def clear_caches
@@ -22,7 +24,7 @@ module Coconut
     end
 
     def config_files
-      Coconut::CONFIG['local']['config_files'].select { |key, config| config['swap'] }
+      config.local['config_files'].select { |key, value| value['swap'] }
     end
 
     def swap_file(file)
@@ -35,7 +37,7 @@ module Coconut
     end
 
     def customers_path
-      "#{Rails.root}/#{Coconut::CONFIG['local']['customer_path']}"
+      "#{Rails.root}/#{config.local['customer_path']}"
     end
 
     def config_file(file)

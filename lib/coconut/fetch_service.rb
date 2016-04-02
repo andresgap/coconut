@@ -3,7 +3,7 @@ module Coconut
 
     def initialize(customer:)
       @customer = customer
-      @server_config = Coconut::CONFIG['server']
+      @config = Configuration.new
       @command = CommandInterface.new
     end
 
@@ -18,25 +18,25 @@ module Coconut
     private
 
     attr_accessor :customer
-    attr_accessor :server_config
+    attr_accessor :config
     attr_accessor :command
 
     def config_files
-      Coconut::CONFIG['local']['config_files']
+      config.local['config_files']
     end
 
     def fetch_file(file)
       puts "Fetching #{file} ..."
-      origin = "#{server_config['shared_folder']}/#{file}"
+      origin = "#{config.server['shared_folder']}/#{file}"
       command.fetch(ssh_user, address, origin, server_file(file))
     end
 
     def ssh_user
-      server_config['ssh_user']
+      config.server['ssh_user']
     end
 
     def address
-      server_config['customers'][customer]['address']
+      config.server['customers'][customer]['address']
     end
 
     def server_file(file)
@@ -44,7 +44,7 @@ module Coconut
     end
 
     def customers_path
-      path = "#{Rails.root}/#{Coconut::CONFIG['local']['customer_path']}"
+      path = "#{Rails.root}/#{config.local['customer_path']}"
       FileUtils.mkdir_p(path) unless File.exist?(path)
       path
     end

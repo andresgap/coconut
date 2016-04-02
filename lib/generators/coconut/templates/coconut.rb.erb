@@ -1,8 +1,0 @@
-module Coconut
-  begin
-    CONFIG = YAML.load_file(File::join(Rails.root, 'config/coconut.yml'))
-  rescue => ex
-  end
-
-  CONFIG ||= {}
-end
