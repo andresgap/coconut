@@ -4,7 +4,7 @@
 D360 Local customer configuration switcher.
 
 # Description
-Coconut fetch the configuration files from dealer360 development servers and stored then on a local folder. With those configuration files it can swap between different customers and prepare your local enviroment to start developing.
+Coconut fetch the configuration files from dealer360 development servers and stored them on a local folder. With those configuration files it can swap between different customers and prepare your local enviroment to start developing or testing locally.
 
 ## Installation
 
@@ -16,10 +16,10 @@ gem 'coconut', require: false
 Add this configuration to your application's Rakefile:
 
 ```ruby
-Dealer360::Application.load_tasks
-
-spec = Gem::Specification.find_by_name('coconut')
-Dir["#{spec.gem_dir}/lib/tasks/**/*.rake"].each { |ext| load ext }
+if Rails.env.development?
+  spec = Gem::Specification.find_by_name('coconut')
+  Dir["#{spec.gem_dir}/lib/tasks/**/*.rake"].each { |ext| load ext }
+end
 ```
 And then execute:
 
@@ -40,22 +40,41 @@ rails g coconut:install
 ```
 ## Coconut.yml
 
-The coconut file consists in 2 main sections, the local which has all local your local configurations and the server section which has all needed configuration to connect and fetch config files from the servers.
+The coconut file consists in 2 main sections, the local which has all your local configurations and the server section which has all the needed configuration to connect and fetch config files from the servers.
 
-### customer_path
+```yaml
+local:
+  customer_path: customers
+  config_files:
+    file_name1.yml:
+      swap: true
+    file_name2.yml:
+      swap: false
+
+server:
+  ssh_user: user_name
+  shared_folder: folder_path
+  customers:
+    $costumer:
+      address: ip_address
+```
+
+- customer_path
 Folder in which the customer config files will be stored.
 
-### config_files
-Specific config files configuration, you can disable the swap functionality for any giving config file
+- config_files
+Specific config files configuration, you can disable the swap functionality for any giving config file.
 
-### ssh_user
-User that will be used to fetch the config files on the server
+- ssh_user
+User that will be used to fetch the config files on the server.
 
-### shared_folder
-Folder in which the config files are stored on the server. Example: /www/d360/shared/
+- shared_folder
+Folder in which the config files are stored on the server.
 
-### customers
+- customers
 Specific customers configurations that will be use to extract the information. Address is the IP address of those servers.
+THe customer name can be any, not specifically the server name.
+
 ## Rake tasks
 
 Fetch configuration files from server. Files are stored in customers folder.
@@ -69,3 +88,8 @@ Swap configuration to another customer. Caches will be cleared!
 ```ruby
 rake coconut:swap[$costumer]
 ```
+
+## Warning
+
+Be aware when you change sensitive files like database, you are going to be pointing to that server.
+If you want to use a local dump. It's possible to create a local config file and swap to the local customer enviroment.
