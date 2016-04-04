@@ -1,5 +1,6 @@
-# Coconut
+[coconut_logo]: https://cloud.githubusercontent.com/assets/5973697/14249640/e8b278dc-fa37-11e5-9930-ee4e4e012918.png
 
+# Coconut ![alt text][coconut_logo]
 D360 Local customer configuration switcher.
 
 ## Installation
