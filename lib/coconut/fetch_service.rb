@@ -39,6 +39,10 @@ module Coconut
       config.server['customers'][customer]['address']
     end
 
+    def environment
+      config.server['customers'][customer]['environment'] || 'integration'
+    end
+
     def server_file(file)
       "#{customers_path}/#{file}.#{customer}"
     end
@@ -61,7 +65,7 @@ module Coconut
     end
 
     def read_yml(path)
-      YAML.load_file(path)['integration']
+      YAML.load_file(path)[environment]
     end
   end
 end
