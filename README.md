@@ -1,10 +1,10 @@
 [coconut_logo]: https://cloud.githubusercontent.com/assets/5973697/14249640/e8b278dc-fa37-11e5-9930-ee4e4e012918.png
 
 # Coconut ![alt text][coconut_logo]
-D360 Local customer configuration switcher.
+Local customer configuration switcher.
 
 # Description
-Coconut fetch the configuration files from dealer360 development servers and stored them on a local folder. With those configuration files it can swap between different customers and prepare your local enviroment to start developing or testing locally.
+Coconut fetch the configuration files from development servers and stored them on a local folder. With those configuration files it can swap between different customers and prepare your local enviroment to start developing or testing locally.
 
 ## Installation
 
