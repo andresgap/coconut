@@ -1,0 +1,15 @@
+local:
+  config_files:
+    filename:
+      swap: true
+    filename2:
+      swap: false
+    filename3:
+      swap: true
+
+server:
+  ssh_user:
+  shared_folder:
+  customers:
+    customer-key:
+      address:

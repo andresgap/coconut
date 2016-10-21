@@ -1,11 +1,12 @@
 module Coconut
+
   class CacheService
 
-    TMP_PATH = "#{Rails.root}/tmp"
+    TMP_PATH = './tmp'
 
     attr_accessor :command
 
-    def initialize(command)
+    def initialize(command = Coconut::CommandInterface.new)
       @command = command
     end
 
@@ -24,4 +25,5 @@ module Coconut
     end
 
   end
+
 end

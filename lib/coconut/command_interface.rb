@@ -1,4 +1,7 @@
+require 'open3'
+
 module Coconut
+
   class CommandInterface
 
     def copy(origin, destination)
@@ -9,8 +12,8 @@ module Coconut
       execute("rm -rf #{path}")
     end
 
-    def fetch(user, address, origin, destination)
-      execute("scp #{user}@#{address}:#{origin} #{destination}")
+    def fetch(address, origin, destination)
+      execute("scp #{ssh_user}@#{address}:#{origin} #{destination}")
     end
 
     private
@@ -21,5 +24,10 @@ module Coconut
       end
     end
 
+    def ssh_user
+      Configuration.instance.ssh_user
+    end
+
   end
+
 end
