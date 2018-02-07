@@ -80,13 +80,13 @@ THe customer name can be any, not specifically the server name.
 Fetch configuration files from server. Files are stored in customers folder.
 
 ```ruby
-rake coconut:fetch[$costumer]
+rake coconut:fetch[$customer]
 ```
 
 Swap configuration to another customer. Caches will be cleared!
 
 ```ruby
-rake coconut:swap[$costumer]
+rake coconut:swap[$customer]
 ```
 
 ## Warning
