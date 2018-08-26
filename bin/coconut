@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-
 require_relative "../lib/coconut"
 
-puts "This is your coconut CLI."
-puts __FILE__
+Coconut::CLI.start(ARGV)
