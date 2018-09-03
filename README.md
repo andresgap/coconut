@@ -7,38 +7,32 @@ Local customer configuration switcher.
 Coconut fetch the configuration files from development servers and stored them on a local folder. With those configuration files it can swap between different customers and prepare your local enviroment to start developing or testing locally.
 
 ## Installation
+Execute the following script to install coconut
 
-Add this line to your application's Gemfile:
+    $ ./install.sh
 
-```ruby
-gem 'coconut', require: false
+Check if coconut was succesfully installed:
+
+    $ which cococonut
+
+This command will install coconut in your system, and create a new folder in your $HOME folder, called .coconut, here is where all the configuration files like be stores. Coconut stores all those configuration on the customer folder, and indetify each customer with a .customer suffix.
+
 ```
-Add this configuration to your application's Rakefile:
+/home/<you-user-name>/.coconut/
+└── customer
+   ├── file1.yml.customer1
+   ├── file2.yml.customer2
+   └── file3.yml.customer3
 
-```ruby
-if Rails.env.development?
-  spec = Gem::Specification.find_by_name('coconut')
-  Dir["#{spec.gem_dir}/lib/tasks/**/*.rake"].each { |ext| load ext }
-end
 ```
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install coconut
 
 ## Usage
-
-Requires a configuration file called coconut.yml, placed in the config folder.
-
-Run generator to create sample
+In the project you will use coconut, you need to create a coconut configuration file called .coconut (not to be confused with the $HOME/.coconut folder). To create this file you need to run the following command.
 
 ```ruby
-rails g coconut:install
+coconut init
 ```
-## Coconut.yml
+## .coconut file
 
 The coconut file consists in 2 main sections, the local which has all your local configurations and the server section which has all the needed configuration to connect and fetch config files from the servers.
 
@@ -55,7 +49,7 @@ server:
   ssh_user: user_name
   shared_folder: folder_path
   customers:
-    $costumer:
+    $customer:
       address: ip_address
 ```
 
@@ -75,18 +69,39 @@ Folder in which the config files are stored on the server.
 Specific customers configurations that will be use to extract the information. Address is the IP address of those servers.
 THe customer name can be any, not specifically the server name.
 
+## Default attributes
+In this customer section you can add default attibutes, to those will be overrriten when you swap the files into your project. This can be done for any file you like that coconut is swaping. See example below.
+
+```yaml
+server:
+  ssh_user: user_name
+  shared_folder: folder_path
+  customers:
+    customer1:
+      address: ip_address
+      file.yml:
+        awesome_attribute: "attribute that needs to be changed"
+      another file.yml:
+        old_attribute: 42
+```
 ## Rake tasks
 
 Fetch configuration files from server. Files are stored in customers folder.
 
 ```ruby
-rake coconut:fetch[$customer]
+coconut fetch $customer
 ```
 
 Swap configuration to another customer. Caches will be cleared!
 
-```ruby
-rake coconut:swap[$customer]
+
+### Default attributes
+In this customer section you can add default attibutes, to those will be overrriten when you swap the files into yout ```rur project. See example below.
+
+```yaml
+
+```
+coconut swap $customer
 ```
 
 ## Warning

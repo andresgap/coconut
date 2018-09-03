@@ -4,6 +4,7 @@ module Coconut
 
     desc 'install', 'install the coconut on the local enviroment'
     def install
+      p "Creating config folder at #{Coconut::Global.configure.config_folder.path}"
       Coconut::Global.install
     end
 
