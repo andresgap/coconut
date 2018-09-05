@@ -9,8 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Andres Hernandez", "Roy Cruz"]
   spec.email         = ["ahernandez@growthaccelerationpartners.com", "rcruz@growthaccelerationpartners.com"]
 
+  spec.licenses    = ['MIT']
   spec.summary       = 'Local customer configuration switcher'
-  spec.description   = 'Local customer configuration switcher'
+  spec.description   = 'A friendy Gem to dinamically change the configuration of your project'
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
