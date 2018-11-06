@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ### https://natelandau.com/bash-scripting-utilities/
 
 #
@@ -74,6 +76,7 @@ function install_coconut() {
         e_success "Coconut was successfully installed"
     else
         e_error "Something happens and coconut wasn't installed"
+        exit
     fi
 }
 
