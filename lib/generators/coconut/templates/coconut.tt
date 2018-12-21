@@ -8,8 +8,10 @@ local:
       swap: true
 
 server:
-  ssh_user:
-  shared_folder:
+  ssh_user: <%= ssh_user %>
+  shared_folder: <%= shared_folder %>
+  prefix: <%= prefix %>
+  suffix: <%= suffix %>
   customers:
     customer-key:
       address:

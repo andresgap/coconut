@@ -15,12 +15,17 @@ module Coconut
 
     desc 'fetch', 'fetch the config files from a server'
     def fetch(customer)
-      Server.from(customer: customer).fetch
+      Server.from(customer_name: customer).fetch
     end
 
     desc 'swap', 'swap the config files from a server'
     def swap(customer)
-      App.current.swap(customer: customer)
+      App.current.swap(customer_name: customer)
+    end
+
+    desc 'version', 'Display the gem version'
+    def version
+      p Coconut::VERSION.cyan
     end
 
   end

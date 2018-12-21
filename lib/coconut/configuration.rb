@@ -23,6 +23,10 @@ module Coconut
       server['customers'][customer]['address']
     end
 
+    def general_config
+      server['customers']['general'] || {}
+    end
+
     def home_folder
       return ENV['HOME']
     end
