@@ -9,9 +9,10 @@ module Coconut
       App.new(path: Dir.pwd)
     end
 
-    def swap(customer:)
-      puts "Swapping the configuration for #{customer}"
-      raise 'No coconut instance detected' if new?
+    def swap(customer_name:)
+      customer = Customer.init(name: customer_name)
+      print "Swapping the configuration for #{customer.name} \n\n".cyan
+      raise 'No coconut instance detected'.red if new?
       switchable_files.each { |file, value| switch_file(file: file, customer: customer) }
       CacheService.new.clear
     end
@@ -31,7 +32,13 @@ module Coconut
     end
 
     def generate_config
-      Generators::ConfigFile.start
+      puts 'Generating .coconut configuration file'.cyan
+      ssh_user = shell.ask('Set your SSH user:')
+      shared_folder = shell.ask('Set shared_folder path (server path):')
+      prefix = shell.ask('Set the server prefix:')
+      suffix = shell.ask('Set the server suffix:')
+
+      Generators::ConfigFile.start([ssh_user, shared_folder, prefix, suffix])
     end
 
     def switchable_files
@@ -39,12 +46,13 @@ module Coconut
     end
 
     def switch_file(file:, customer:)
-      puts "Swapping #{file} ..."
-      server_file = Configuration
-        .instance
-        .config_folder
-        .customer_config_file(file: file, customer: customer)
-      command.copy(server_file, config_file(file))
+      print "Swapping #{file} ...".blue
+      server_file_path = customer.local_file_path(file)
+      command.copy(server_file_path, config_file(file))
+      print "\rSwapping #{file} - [Sucessfull] ✔ \n".green
+    rescue => e
+      print "\rSwapping #{file} - [Fail] ✖ \n".red
+      raise e
     end
 
     def config_file(file)
@@ -53,6 +61,10 @@ module Coconut
 
     def command
       @command ||= CommandInterface.new
+    end
+
+    def shell
+      Thor::Base.shell.new
     end
 
   end

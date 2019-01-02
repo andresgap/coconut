@@ -18,6 +18,10 @@ module Coconut
       ''
     end
 
+    def general_config
+      {}
+    end
+
     def share_folder
       ''
     end
